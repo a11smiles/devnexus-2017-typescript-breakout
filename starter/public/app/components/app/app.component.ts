@@ -3,15 +3,9 @@ import { Component } from '@angular/core';
 @Component ({
     moduleId: module.id,
     selector: 'books-app',
-    template: `
-        <h1>{{title}}</h1>
-        <nav>
-            <a routerLink="/" routerLinkActive="active">Books</a>
-        </nav>
-        <router-outlet></router-outlet>
-    `
+    templateUrl: 'app.component.html'
 })
 
 export class AppComponent {
-    title = 'Books';
+    title = 'My Library';
 }
