@@ -1,4 +1,4 @@
-Book = function() {
+module.exports = function() {
     this.getAll = function() {
         return 'all';
     };
@@ -8,4 +8,3 @@ Book = function() {
     }
 }
 
-module.exports = Book;
