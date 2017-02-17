@@ -1,7 +1,10 @@
 {
   "name": "devnexus2017",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "start": "tsc && node server",
+    "postinstall": "npm --prefix ./public install ./public"
+  },
   "dependencies": {
     "body-parser": "~1.9.3",
     "express": "~4.10.3",
@@ -11,6 +14,7 @@
     "@types/body-parser": "0.0.33",
     "@types/express": "^4.0.34",
     "@types/morgan": "^1.7.32",
-    "@types/node": "^6.0.57"
+    "@types/node": "^6.0.57",
+    "typescript": "^2.1.6"
   }
 }

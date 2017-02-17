@@ -1,18 +1,19 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/app/**/*.js
-/public/**/*.js
+**/public/**/*.js
+!**/public/systemjs.config.js
 **/*.map
+**/public/etc
 
 # dependencies
 node_modules
-/bower_components
+bower_components
 
 # IDEs and editors
-/.idea
-/.vscode
-/.vs
+.idea
+.vscode
+.vs
 .project
 .classpath
 *.launch

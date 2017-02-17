@@ -1,6 +1,7 @@
-var express = require('express'),
+var bodyParser = require('body-parser')
+    express = require('express'),
     morgan = require('morgan'),
-    bodyParser = require('body-parser');
+    path = require('path');
 
 var app = express();
 var config = require('./config');
@@ -23,7 +24,7 @@ var bookRoutes = require('./app/api/book')(app, express);
 app.use('/api', bookRoutes);
 
 app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 

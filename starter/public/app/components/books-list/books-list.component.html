@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="container-panel">
+        <div *ngFor="let book of books">
+            <li><a [routerLink]="['/book', book.id]">{{book.name}}</a></li>
+        </div>
+    </div>
+</div>
