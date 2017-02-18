@@ -27,7 +27,7 @@ The purpose of this step is to finish our Node.js vanilla Javascript-to-TypeScri
 We'll start by properly creating our unit tests to test a secondary repository.  We will then create the secondary 'repository' that contains the data in an XML file to mimic a different repository type.  
 
 ### Step 6. Add Dependency Injection and Refactor
-To this point, we've converted the entire application from JavaScript to TypeScript and have added unit tests.  We will now decouple the data layer and the service layer by introducing dependency injection.  By adding dependency injection, we can easily switch between our two repositories with requiring _very_ minimal refactoring.
+To this point, we've converted the entire application from JavaScript to TypeScript and have added unit tests.  We will now decouple the data layer and the service layer by introducing dependency injection.  By adding dependency injection, we can easily switch between our two repositories while requiring _very_ minimal refactoring.
 
 ### Step 7. Bonus: Add Named Dependencies
 As a bonus, we'll add the capability to _dynamically_ switch between repositories via the URL.
