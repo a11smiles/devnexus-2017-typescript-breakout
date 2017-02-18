@@ -9,12 +9,25 @@ Each folder contains the previous step's completed code.  In other words, the co
 The objective(s) of each folder are outlined below.
 
 ### Starter
-The starter folder contains a basic Node.js express server that serves a simple Angular 2 application. The Angular 2 application queries data from an API exposed by the Node.js application.  The data returned by the API is hard-coded. 
-### 1. Add unit tests to api, data
+The starter folder contains a basic Node.js express server that serves a simple Angular 2 application. The Angular 2 application queries data from an API exposed by the Node.js application; the data returned by the API is hard-coded.  The objective of this folder is to simply get familiar with the application.
 
-### 2. Add unit tests to server.js
-### 3. Convert server.js typescript, update unit tests
-### 4. Convert api, data to typescript
-### 5. Create second repository (XML), add unit tests
-### 6. Add InversifyJS, wire up IoC
-### 7. Bonus: add named dependencies
+### Step 1. Add Unit Tests to the API and Data Repository
+Because there were no steps in the previous section requiring code modifications, there's no code in this folder.  The purpose of this step is to add Mocha unit tests to the Node.js API and the data repository.
+
+### Step 2. Add Unit Tests to _server.js_
+In this step, we add unit tests to the express application to complete our server-side testing.
+
+### Step 3. Convert _server.js_ to TypeScript and Update Unit Tests
+Now that unit tests have been added to the Node.js application, we'll begin coverting the application to TypeScript and update the corresponding unit tests.  The first refactoring is the express application.
+
+### Step 4. Convert API and Data Repository to TypeScript
+The purpose of this step is to finish our Node.js vanilla Javascript-to-TypeScript conversion.  Additionally, we will move the hard-coded data to an external JSON file to 'mimic' an external repository.
+
+### Step 5. Create Second Repository (XML) and Add Unit Tests
+We'll start by properly creating our unit tests to test a secondary repository.  We will then create the secondary 'repository' that contains the data in an XML file to mimic a different repository type.  
+
+### Step 6. Add Dependency Injection and Refactor
+To this point, we've converted the entire application from JavaScript to TypeScript and have added unit tests.  We will now decouple the data layer and the service layer by introducing dependency injection.  By adding dependency injection, we can easily switch between our two repositories with requiring _very_ minimal refactoring.
+
+### Step 7. Bonus: Add Named Dependencies
+As a bonus, we'll add the capability to _dynamically_ switch between repositories via the URL.
