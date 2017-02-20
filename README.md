@@ -20,8 +20,8 @@ The purpose of this step is to add Mocha unit tests to the Node.js API and the d
 ### Step 3. A Little House Cleaning
 Before we begin our conversion from JavaScript to TypeScript, let's clean up our project a bit.
 
-### Step 4. Convert _server.js_ to TypeScript and Update Unit Tests
-Now that unit tests have been added to the Node.js application, we'll begin coverting the application to TypeScript and update the corresponding unit tests.  The first refactoring is the express application.
+### Step 4. Convert _server.js_ to TypeScript
+Now that unit tests have been added to the Node.js application, we'll begin coverting the application to TypeScript.  The first refactoring is the express application.
 
 ### Step 5. Convert API and Data Repository to TypeScript
 The purpose of this step is to finish our Node.js vanilla Javascript-to-TypeScript conversion.  Additionally, we will move the hard-coded data to an external JSON file to 'mimic' an external repository.

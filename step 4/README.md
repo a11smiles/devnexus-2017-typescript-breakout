@@ -1,5 +1,5 @@
-# Step 4. Convert _server.js_ to TypeScript and Update Unit Tests
-Now that unit tests have been added to the Node.js application, we'll begin coverting the application to TypeScript and update the corresponding unit tests.  The first refactoring is the express application.
+# Step 4. Convert _server.js_ to TypeScript
+Now that unit tests have been added to the Node.js application, we'll begin coverting the application to TypeScript.  The first refactoring is the express application.
 
 There's two parts of the application that need to be updated to TypeScript for the server.
 
@@ -45,3 +45,13 @@ let config = new Config();
 **Explanation:**
   1. We are creating a constant of our express application.  This is a deep immutable object that, in our case, will be globally scoped.
   2. We instantiate a configuration object of which we'll reference the `port` property later.
+
+## Compile TypeScript
+In the previous steps, we didn't need to transpile our Node.js application because it was already in JavaScript.  We now need to transpile the application before we can test it.
+
+In the `step 4` folder, type:
+```
+npm run tsc
+```
+
+This will run the TypeScript transpiler; after which, we can test as normal.
