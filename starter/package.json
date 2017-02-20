@@ -3,6 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "tsc && node server",
+    "tsc": "tsc",
     "postinstall": "npm --prefix ./public install ./public"
   },
   "dependencies": {

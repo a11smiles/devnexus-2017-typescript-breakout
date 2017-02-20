@@ -1,4 +1,4 @@
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser'),
     express = require('express'),
     morgan = require('morgan'),
     path = require('path');
