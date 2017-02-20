@@ -46,7 +46,7 @@ let config = new Config();
   1. We are creating a constant of our express application.  This is a deep immutable object that, in our case, will be globally scoped.
   2. We instantiate a configuration object of which we'll reference the `port` property later.
 
-## Compile TypeScript
+## Transpile TypeScript
 In the previous steps, we didn't need to transpile our Node.js application because it was already in JavaScript.  We now need to transpile the application before we can test it.
 
 In the `step 4` folder, type:
