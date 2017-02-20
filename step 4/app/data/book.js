@@ -74,11 +74,16 @@ var booksData = [
 function Books() { }
 
 Books.prototype.getAll = function () {
-    return booksData;
+    return new Promise((resolve, reject) => {
+        resolve(booksData);
+    });
 };
 
 Books.prototype.get = function (id) {
-    return booksData.filter((b) => { return b.id == id; })[0];
+    return new Promise((resolve, reject) => {
+        var book = booksData.filter((b) => { return b.id == id; })[0];
+        resolve(book);
+    });
 };
 
 module.exports = Books;

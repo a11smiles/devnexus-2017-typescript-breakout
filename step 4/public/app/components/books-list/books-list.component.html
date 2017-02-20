@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="container-panel" *ngFor="let book of books">
+        <div class="container-image"><a [routerLink]="['/book', book.id]"><img src="{{book.cover}}" /></a></div>
+        <a [routerLink]="['/book', book.id]">{{book.name}}</a>
+        <span class="author">{{book.author}}</span>
+    </div>
+</div>
