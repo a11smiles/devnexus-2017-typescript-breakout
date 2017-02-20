@@ -12,7 +12,7 @@ The objective(s) of each folder are outlined below.
 The starter folder contains a basic Node.js express server that serves a simple Angular 2 application. The Angular 2 application queries data from an API exposed by the Node.js application; the data returned by the API is hard-coded.  The objective of this folder is to simply get familiar with the application.
 
 ### Step 1. Add Unit Tests to _server.js_
-Because there were no steps in the previous section requiring code modifications, there's no code in this folder.  In this step, we add unit tests to the express application to begin our server-side testing.
+In this step, we add unit tests to the express application to begin our server-side testing.
 
 ### Step 2. Add Unit Tests to the API and Data Repository
 The purpose of this step is to add Mocha unit tests to the Node.js API and the data repository.
