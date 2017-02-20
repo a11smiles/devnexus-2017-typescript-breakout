@@ -52,7 +52,7 @@ module.exports = server;
 Let's start by adding a `test` folder in the top folder structure (the 'top' folder is the step's folder). 
 
 ### Server Tests
-In the `step 1/test/` folder, let's add a test specifications file. In large applications, it's customary to give the file a name that signifies library it's testing. So, let's name it `server.spec.js`.
+In the `/step 1/test/` folder, let's add a test specifications file. In large applications, it's customary to give the file a name that signifies library it's testing. So, let's name it `server.spec.js`.
 
 In the `server.spec.js` add the following code:
 ```
