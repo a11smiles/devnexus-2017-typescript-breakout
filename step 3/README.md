@@ -9,7 +9,7 @@ In the `step 3` folder, create a new file named `test.bootstrap.js` and add the 
 process.env.NODE_ENV = 'test';
 ```
 
-With the `test.bootstrap.js` file, we're going to set some an environment variable that encapsulates our test run.
+With the `test.bootstrap.js` file, we're going to set an environment variable that encapsulates our test run.
 
 ## Make Test Execution Easier
 If you are tired of typing in the long command for running tests, we can also make that easier.
@@ -19,19 +19,19 @@ Open the file `step 3\package.json`.  Add a comma to the end of line 6 (line 6 b
 "test": "mocha -r ./test.bootstrap.js ./test/**/*.spec.js"
 ```
 
-(NOTE: The `-r ./test.bootstrap.js` tells Mocha to load our 'required' file.)
+(NOTE: The `-r ./test.bootstrap.js` tells Mocha to load our 'required' file that we created in the previous step.)
 
 ## Update _server.js_
 There's two areas we need to update _server.js_.
 
-First, around line 19, wrap `app.use(morgan('dev'));` with an _if-statement_ like so:
+First, around line 19, wrap `app.use(morgan('dev'));` with an _if_-statement like so:
 ```
 if (app.get('env') === 'development') {
     app.use(morgan('dev'));
 }
 ```
 
-Second, wrap the `console.log` method call on line 35 with the same like so:
+Second, wrap the `console.log` method call on line 35 with the same:
 ```
 if (app.get('env') === 'development') {
     console.log('Web server listening on port %s', config.port);
