@@ -7,7 +7,7 @@ There are a number of good unit testing frameworks out there; Mocha is one of th
 Reminder, before each step, we'll need to install all of our node dependencies.
 
 In the `step 1` folder, install all dependencies by typing:
-```
+```bash
 npm install
 ```
 
@@ -15,7 +15,7 @@ npm install
 We need to add the Mocha and Chai libraries to our project first.  Additionally, we need to add the typings for the libraries to help us with type resolution when we move to TypeScript.
 
 In the `step 1` folder, add the required libraries to the project by typing the following command:
-```
+```bash
 npm i mocha chai @types/mocha @types/chai --save-dev
 ```
 
@@ -23,7 +23,7 @@ npm i mocha chai @types/mocha @types/chai --save-dev
 For testing the API (and general requests against the server), we're going to need to mock, or simulate, an HTTP request.  Supertest is a library that allows us to do just that.
 
 In the project folder, add Supertest to the project by typing the following command:
-```
+```bash
 npm i supertest --save-dev
 ```
 
@@ -33,12 +33,12 @@ Currently, _server.js_ runs just fine for serving our web application. However, 
 Open up _server.js_ and scroll down to the end of the file.
 
 Change the last few lines from this:
-```
+```js
 app.listen(config.port);
 console.log('Web server listening on port %s', config.port);
 ```
 to this:
-```
+```js
 var server = app.listen(config.port, () => {
     console.log('Web server listening on port %s', config.port);
 });
@@ -55,7 +55,7 @@ Let's start by adding a `test` folder in the top folder structure (the 'top' fol
 In the `/step 1/test/` folder, let's add a test specifications file. In large applications, it's customary to give the file a name that signifies library it's testing. So, let's name it `server.spec.js`.
 
 In the `server.spec.js` add the following code:
-```
+```js
 var request = require('supertest');
 var expect = require('chai').expect;
 
@@ -94,7 +94,7 @@ describe('loading express', function() {
 
 ## Run Your Test
 In the `step 1` folder, type the following:
-```
+```bash
 node_modules/.bin/mocha test/**/*.spec.js
 ```
 

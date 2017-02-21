@@ -22,7 +22,7 @@ Of course, if you compiled and ran the tests at this point, you would receive an
 
 ## Create XML Data Layer Stub
 Create a new file named `step 6/app/data/xml/books.ts` and paste the following code into it:
-```js
+```ts
 import { Book, IBook } from '../interfaces/books';
 
 export class Books implements IBook {
@@ -51,7 +51,7 @@ npm i @types/xml2js --save-dev
 
 ## Complete the XML Data Layer
 Before the first line of `step 6/app/data/xml/books.ts` insert the following 2 lines:
-```js
+```ts
 import * as fs from 'fs';
 import * as xml2js from 'xml2js';
 ```
@@ -59,7 +59,7 @@ import * as xml2js from 'xml2js';
 To adhere to the 'single responsibility' rule of SOLID design principles let's create two private utility methods that will: 1) read the XML file (`readBooks()`); and, 2) convert the XML data to a JSON array of book objects (`formatData()`).
 
 Add these two methods after the constructor, inside of our `Books` class:
-```js
+```ts
     private readBooks(): Promise<Book[]> {
         return new Promise<Book[]>((resolve, reject) => {
             fs.readFile(__dirname + '/data.xml', (err, data) => {
@@ -97,7 +97,7 @@ Add these two methods after the constructor, inside of our `Books` class:
 ```
 
 Now we're ready to implement the `get` and `getAll` methods with the following code:
-```js
+```ts
     public get(id: string): Promise<Book> {
         return new Promise<Book>((resolve, reject) => {
             this.readBooks().then((data) => {

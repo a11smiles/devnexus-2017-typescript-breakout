@@ -5,7 +5,7 @@ The purpose of this step is to add Mocha unit tests to the Node.js API and the d
 Currently, our API's data layer is synchronous - it simply returns a hard-coded array.  As you can imagine, this is not very practical as this is hardly ever the case in a real-world scenario.  So, before we begin unit testing our API and data layer, let's convert them to function asynchronously.  We will do this by using ES6 Promises.
 
 Open `/step 2/app/data/books.js` and change the methods at the end of the file to look like the following:
-```
+```js
 Books.prototype.getAll = function () {
     return new Promise((resolve, reject) => {
         resolve(booksData);
@@ -23,7 +23,7 @@ Books.prototype.get = function (id) {
 Now, instead of returning an array of book or a single book, we are returning a _promise_ of an array or book, respectively.
 
 We also need to update the API to expect a promise from our data later. Open `/step 2/app/api/books.js` and change the two _get_ requests to the following:
-```
+```js
     router.route('/books')
 
         .get(function (req, res) {
@@ -55,7 +55,7 @@ Go ahead and test the application to make sure it's running correctly.  Once you
 Unit testing, as the name implies, is all about testing individual components, or units, of the application.  We focus on the specific functionality of the unit (i.e. class, method, function, etc.) rather than the integration as a whole.  In order to separate and test these units without their various dependencies, we'll need to _stub_ the dependencies.  Sinon provides various faking mechanisms to allow us to _stub_ out (e.g. fake) some of the functionality in our application.
 
 In the `step 2` project foler, add sinon to the project:
-```
+```bash
 npm i sinon @types/sinon --save-dev
 ```
 
@@ -66,7 +66,7 @@ Inside the `test` folder, we need to mimic the folder structure of the `app` fol
 In the `/step 2/test/app/api` folder, let's add a test specs file named `books.spec.js`.
 
 In this file, add the following code:
-```
+```js
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var request = require('supertest');
@@ -195,7 +195,7 @@ Testing the data access layer is important for testing any business logic in sto
 In the `/step 2/test/app/data` folder, let's add another test specs file.  Again, we'll name it `books.spec.js`.
 
 In the file, add the following code:  
-```
+```js
 var expect = require('chai').expect;
 var Books = require('../../../app/data/books');
 
@@ -244,7 +244,7 @@ describe('DATA (json): books', function () {
 
 ## Run Your Tests
 In the `step 2` folder, type the following:
-```
+```bash
 node_modules/.bin/mocha test/**/*.spec.js
 ```
 

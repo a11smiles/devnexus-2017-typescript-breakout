@@ -7,7 +7,7 @@ Out of all of the steps in this workshop, this is the most involved and will req
 Because we will be moving our data to an external JSON file, we'll need a library that can parse the file.
 
 In the `step 5` project foler, add sinon to the project:
-```
+```bash
 npm i load-json-file --save
 ```
 
@@ -15,7 +15,7 @@ npm i load-json-file --save
 We also need the types declaration file for load-json-file so that TypeScript won't give us any transpile errors.
 
 In the `step 5` project foler, add sinon to the project:
-```
+```bash
 npm i @types/load-json-file --save-dev
 ```
 
@@ -34,7 +34,7 @@ In the `step 5/app/data/books.js` file you will find the `booksData` array.
 I won't go into the details about interfaces in TypeScript, but suffice it to say, while they are not transpiled to actual JavaScript, they are an essential part of the language.  We need to create an interface for our data layer, including the book model.
 
 In the `step 5/app/data` folder, create a subfolder called `interfaces`.  Inside this folder, create a new file named `books.ts`.  In this file, place the following code:
-```
+```ts
 export class Book {
     id: string;
     name: string;
@@ -56,7 +56,7 @@ This file is responsible for two things: 1) a _model_ to describe our book objec
 
 ## Create Concrete Data Layer Class
 In the `step 5/app/data/json` folder, create a new file named `books.ts` and copy to following code into it:
-```
+```ts
 import * as loadJsonFile from 'load-json-file';
 import { Book, IBook } from '../interfaces/books';
 
@@ -96,13 +96,13 @@ We no longer need the old data layer as it has now been replaced by our new one 
 
 ## Update Reference in the API
 Change the first line of `step 5/app/api/books.js` to reference the new data layer as it is being transpiled and exposed by TypeScript:
-```
+```js
 var Books = require('../data/json/books').Books;
 ```
 
 ## Update Reference in the API Unit Tests
 Change the fourth line of `step 5/test/app/api/books.spec.js` to reference the new data layer:
-```
+```js
 var Book = require('../../../app/data/json/books').Books;
 ```
 
@@ -112,13 +112,13 @@ Now that we've moved our data layer to a subfolder ('json'), let's do the same t
 **NOTE:** Because we will eventually _inject_ our data access layer into the application at runtime, we could _theoretically_ do the same for the unit test.  And, in this case, it may seem easy since we're dealing with static data files.  However, different data repositories require different mechanisms for CRUD operations - and possibly different ways to _describe_ the data within the repository (e.g. SQL vs. NoSQL) - and would require specifics around setup and teardown fixtures within our unit tests.  Therefore, its a good practice to have a different set of unit tests for each repository.
 
 Change the second line of `step 5/test/app/data/json/books.spec.js` to reference the new data layer:
-```
+```js
 var Books = require('../../../../app/data/json/books').Books;
 ```
 
 ## Compile and Test
 Before we continue let's go ahead and test what we've done so far to make sure we're still on track.  In the `step 5` folder, type the following:
-```
+```bash
 npm run tsc
 npm test
 ```
@@ -129,7 +129,7 @@ If everything has been refactored successfully, you should see 7 passing tests.
 Let's now turn our attention to refactoring the API for TypeScript.
 
 In the `step 5/app/api` folder, rename `books.js` to `booksController.ts`. Then, replace the content of the file with the following:
-```
+```ts
 import { Router, Request, Response } from 'express';
 import { Books } from '../data/json/books';
 
@@ -174,7 +174,7 @@ export class BooksController {
 To keep our project organized and our express application file clean, let's create a single, master API controller that will allow us to add API routes should we need to later.
 
 In the `step 5/app/api` folder, create a new file named `index.ts`. Inside of this file, place the following code:
-```
+```ts
 import { Router, Request, Response } from 'express';
 import { BooksController } from './booksController';
 
@@ -197,18 +197,18 @@ export const ApiRoutesController: Router = router;
 There's two small modifications we need to make to the `step 5/server.ts` file.
 
 First, on line 7 (after the `import Config...` line), insert the following line:
-```
+```ts
 import { ApiRoutesController } from './app/api';
 ```
 
 Second, around line 28 or 29, you'll see the following:
-```
+```js
 var bookRoutes = require('./app/api/books')(app, express);
 app.use('/api', bookRoutes);
 ```
 
 Replace those two lines with the following single line:
-```
+```ts
 app.use('/api', ApiRoutesController);
 ```
 
@@ -217,7 +217,7 @@ Finally, let's change the file name to reflect our API filename changes. Rename 
 
 ## Compile and Test
 Congratulations! We're done refactoring our Node.js application. Let's make sure everything is working as expected. In the `step 5` folder, type the following:
-```
+```bash
 npm run tsc
 npm test
 ```

@@ -5,13 +5,13 @@ The starter folder contains a basic Node.js express server that serves a simple 
 Before each step, we'll need to install all of our node dependencies.
 
 In the `starter` folder, install all dependencies by typing:
-```
+```bash
 npm install
 ```
 
 ## Start the Web Server
 Go ahead and look around the source code.  When you're ready to start the application, in the `starter` folder, type:
-```
+```bash
 npm start
 ```
 

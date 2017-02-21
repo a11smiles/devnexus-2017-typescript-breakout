@@ -5,7 +5,7 @@ There's two parts of the application that need to be updated to TypeScript for t
 
 ## Change _config.js_
 _config.js_ currently exports a generic object.  We need to convert the object to a more formal class. First, rename _config.js_ to _config.ts_. Second, refactor the code in the configuration file to the following:
-```
+```ts
 export default class Config {
     public port: number;
 
@@ -19,7 +19,7 @@ export default class Config {
 There's really not much to change in the express application.  We simply need to update some references, or rather, how we import those references. First, like the _config.js_ in the previous step, rename _server.js_ to _server.ts_.  Second, we need to refactor the references and the instantiations of our express application and configuration class.
 
 Replace the first 7 lines:
-```
+```js
 var bodyParser = require('body-parser'),
     express = require('express'),
     morgan = require('morgan'),
@@ -30,7 +30,7 @@ var config = require('./config');
 ```
 
 with:
-```
+```ts
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as path from 'path';
@@ -50,7 +50,7 @@ let config = new Config();
 In the previous steps, we didn't need to transpile our Node.js application because it was already in JavaScript.  We now need to transpile the application before we can test it.
 
 In the `step 4` folder, type:
-```
+```bash
 npm run tsc
 ```
 
