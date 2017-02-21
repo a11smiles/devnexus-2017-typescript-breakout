@@ -120,6 +120,7 @@ Open up both `step 7/app/data/json/books.ts` _and_ `step 7/app/data/xml/books.ts
   import { injectable } from 'inversify';
   ```
   2. Before the `class` declaration, insert the following descriptor:
+  
   ```tsc
   @injectable()
   ```
