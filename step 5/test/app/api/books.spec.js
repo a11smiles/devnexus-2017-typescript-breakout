@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var request = require('supertest');
-var Book = require('../../../app/data/book');
-var api = require('../../../app/api/book');
+var Books = require('../../../app/data/books');
+var api = require('../../../app/api/books');
 
 describe('API: books', function () {
     var server;
@@ -49,7 +49,7 @@ describe('API: books', function () {
         var getAllStub;
 
         before(function () {
-            getAllStub = sinon.stub(Book.prototype, 'getAll', () => {
+            getAllStub = sinon.stub(Books.prototype, 'getAll', () => {
                 return new Promise((resolve, reject) => {
                     resolve(booksData);
                 })
@@ -65,8 +65,8 @@ describe('API: books', function () {
                 .expect(200, (err, resp) => {
                     expect(resp.body).to.not.be.empty;
 
-                    var books = resp.body;
-                    expect(books).to.have.lengthOf(3);
+                    var bkArr = resp.body;
+                    expect(bkArr).to.have.lengthOf(3);
                     done();
                 });
         });
@@ -76,7 +76,7 @@ describe('API: books', function () {
         var getStub;
 
         before(function () {
-            getStub = sinon.stub(Book.prototype, 'get', (id) => {
+            getStub = sinon.stub(Books.prototype, 'get', (id) => {
                 return new Promise((resolve, reject) => {
                     var book = booksData.filter((b) => { return b.id == id; })[0];
                     resolve(book);
@@ -93,9 +93,9 @@ describe('API: books', function () {
                 .expect(200, (err, resp) => {
                     expect(resp.body).to.not.be.empty;
 
-                    var book = resp.body;
-                    expect(book).to.not.be.instanceOf(Array);
-                    expect(book.author).to.equal('George Washington');
+                    var bk = resp.body;
+                    expect(bk).to.not.be.instanceOf(Array);
+                    expect(bk.author).to.equal('George Washington');
                     done();
                 });
         });

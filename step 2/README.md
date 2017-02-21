@@ -4,7 +4,7 @@ The purpose of this step is to add Mocha unit tests to the Node.js API and the d
 ## Add Asynchronous Functionality
 Currently, our API's data layer is synchronous - it simply returns a hard-coded array.  As you can imagine, this is not very practical as this is hardly ever the case in a real-world scenario.  So, before we begin unit testing our API and data layer, let's convert them to function asynchronously.  We will do this by using ES6 Promises.
 
-Open `/step 2/app/data/book.js` and change the methods at the end of the file to look like the following:
+Open `/step 2/app/data/books.js` and change the methods at the end of the file to look like the following:
 ```
 Books.prototype.getAll = function () {
     return new Promise((resolve, reject) => {
@@ -22,26 +22,26 @@ Books.prototype.get = function (id) {
 
 Now, instead of returning an array of book or a single book, we are returning a _promise_ of an array or book, respectively.
 
-We also need to update the API to expect a promise from our data later. Open `/step 2/app/api/book.js` and change the two _get_ requests to the following:
+We also need to update the API to expect a promise from our data later. Open `/step 2/app/api/books.js` and change the two _get_ requests to the following:
 ```
     router.route('/books')
 
         .get(function (req, res) {
-            var book = new Book();
-            book.getAll().then((books) => {
-                res.json(books);
+            var books = new Books();
+            books.getAll().then((bkArr) => {
+                res.json(bkArr);
             });
         });
 
     router.route('/books/:id')
 
         .get(function (req, res) {
-            var book = new Book();
-            book.get(req.params.id).then((found) => {
-                if (found == null || found === undefined) {
+            var books = new Books();
+            books.get(req.params.id).then((bk) => {
+                if (bk == null || bk === undefined) {
                     res.sendStatus(404);
                 } else {
-                    res.json(found);
+                    res.json(bk);
                 }
             });
         });
@@ -63,15 +63,15 @@ npm i sinon @types/sinon --save-dev
 Inside the `test` folder, we need to mimic the folder structure of the `app` folder so that we can easily organize our tests. So, let's also create the `api` and `data` subfolders.
 
 ### API Tests
-In the `/step 2/test/app/api` folder, let's add a test specs file named `book.spec.js`.
+In the `/step 2/test/app/api` folder, let's add a test specs file named `books.spec.js`.
 
 In this file, add the following code:
 ```
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var request = require('supertest');
-var Book = require('../../../app/data/book');
-var api = require('../../../app/api/book');
+var Books = require('../../../app/data/books');
+var api = require('../../../app/api/books');
 
 describe('API: books', function () {
     var server;
@@ -118,7 +118,7 @@ describe('API: books', function () {
         var getAllStub;
 
         before(function () {
-            getAllStub = sinon.stub(Book.prototype, 'getAll', () => {
+            getAllStub = sinon.stub(Books.prototype, 'getAll', () => {
                 return new Promise((resolve, reject) => {
                     resolve(booksData);
                 })
@@ -134,8 +134,8 @@ describe('API: books', function () {
                 .expect(200, (err, resp) => {
                     expect(resp.body).to.not.be.empty;
 
-                    var books = resp.body;
-                    expect(books).to.have.lengthOf(3);
+                    var bkArr = resp.body;
+                    expect(bkArr).to.have.lengthOf(3);
                     done();
                 });
         });
@@ -145,7 +145,7 @@ describe('API: books', function () {
         var getStub;
 
         before(function () {
-            getStub = sinon.stub(Book.prototype, 'get', (id) => {
+            getStub = sinon.stub(Books.prototype, 'get', (id) => {
                 return new Promise((resolve, reject) => {
                     var book = booksData.filter((b) => { return b.id == id; })[0];
                     resolve(book);
@@ -162,9 +162,9 @@ describe('API: books', function () {
                 .expect(200, (err, resp) => {
                     expect(resp.body).to.not.be.empty;
 
-                    var book = resp.body;
-                    expect(book).to.not.be.instanceOf(Array);
-                    expect(book.author).to.equal('George Washington');
+                    var bk = resp.body;
+                    expect(bk).to.not.be.instanceOf(Array);
+                    expect(bk.author).to.equal('George Washington');
                     done();
                 });
         });
@@ -192,21 +192,21 @@ describe('API: books', function () {
 ### Data Access Layer Tests
 Testing the data access layer is important for testing any business logic in stored procedures or ORM queries.  This will be very basic first, however, in a later step, we'll add a little more complexity.
 
-In the `/step 2/test/app/data` folder, let's add another test specs file.  Again, we'll name it `book.spec.js`.
+In the `/step 2/test/app/data` folder, let's add another test specs file.  Again, we'll name it `books.spec.js`.
 
 In the file, add the following code:  
 ```
 var expect = require('chai').expect;
-var Book = require('../../../app/data/book');
+var Books = require('../../../app/data/books');
 
 describe('DATA (json): books', function () {
 
     describe('getAll', function () {
         it('should return a list of all books', function (done) {
-            var book = new Book();
-            book.getAll().then((books) => {
-                expect(books).to.be.instanceOf(Array);
-                expect(books).to.have.lengthOf(10);
+            var books = new Books();
+            books.getAll().then((bkArr) => {
+                expect(bkArr).to.be.instanceOf(Array);
+                expect(bkArr).to.have.lengthOf(10);
                 done();
             }).catch((e) => {
                 done(e);
@@ -216,10 +216,10 @@ describe('DATA (json): books', function () {
 
     describe('get', function () {
         it('should return a single book', function (done) {
-            var book = new Book();
-            book.get('1491929480').then((found) => {
-                expect(found).to.not.be.instanceOf(Array);
-                expect(found.author).to.equal('Lindsay Bassett');
+            var books = new Books();
+            books.get('1491929480').then((bk) => {
+                expect(bk).to.not.be.instanceOf(Array);
+                expect(bk.author).to.equal('Lindsay Bassett');
                 done();
             }).catch((e) => {
                 done(e);
@@ -227,9 +227,9 @@ describe('DATA (json): books', function () {
         });
 
         it('should return null', function (done) {
-            var book = new Book();
-            book.get('5').then((found) => {
-                expect(found).to.be.undefined;
+            var books = new Books();
+            books.get('5').then((bk) => {
+                expect(bk).to.be.undefined;
                 done();
             }).catch((e) => {
                 done(e);
