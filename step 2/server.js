@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/public'));
 
-var bookRoutes = require('./app/api/book')(app, express);
+var bookRoutes = require('./app/api/books')(app, express);
 app.use('/api', bookRoutes);
 
 app.get('*', function (req, res) {

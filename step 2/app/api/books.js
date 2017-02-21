@@ -1,4 +1,4 @@
-var Book = require('../data/book');
+var Books = require('../data/books');
 
 module.exports = function (app, express) {
     var router = express.Router();
@@ -6,20 +6,20 @@ module.exports = function (app, express) {
     router.route('/books')
 
         .get(function (req, res) {
-            var book = new Book();
-            res.json(book.getAll());
+            var books = new Books();
+            res.json(books.getAll());
         });
 
     router.route('/books/:id')
 
         .get(function (req, res) {
-            var book = new Book();
-            var found = book.get(req.params.id);
+            var books = new Books();
+            var bookObj = books.get(req.params.id);
 
-            if (found == null || found === undefined) {
+            if (bookObj == null || bookObj === undefined) {
                 res.sendStatus(404);
             } else {
-                res.json(book.get(req.params.id));
+                res.json(bookObj);
             }
         });
 
