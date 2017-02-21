@@ -213,10 +213,10 @@ app.use('/api', ApiRoutesController);
 ```
 
 ## Rename API Unit Tests
-Let's change the file name to reflect our API filename changes. Rename `step 5/test/app/api/books.spec.js` to `booksController.spec.js`.  The great news is that there's no changes required for the actual unit tests themselves.
+Finally, let's change the file name to reflect our API filename changes. Rename `step 5/test/app/api/books.spec.js` to `booksController.spec.js`.  The great news is that there's no changes required for the actual unit tests themselves.
 
 ## Compile and Test
-Congratulations! We're done refactoring our JavaScript Node.js application. Let's make sure everything is working as expected. In the `step 5` folder, type the following:
+Congratulations! We're done refactoring our Node.js application. Let's make sure everything is working as expected. In the `step 5` folder, type the following:
 ```
 npm run tsc
 npm test
