@@ -1,7 +1,10 @@
+import 'reflect-metadata';
+import { injectable } from 'inversify';
 import * as fs from 'fs';
 import * as xml2js from 'xml2js';
 import { Book, IBook } from '../interfaces/books';
 
+@injectable()
 export class Books implements IBook {
     constructor() { }
 

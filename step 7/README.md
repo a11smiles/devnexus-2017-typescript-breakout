@@ -26,15 +26,20 @@ Two things:
 
 Let's proceed with true dependecy injection the TypeScript way.
 
-## Add InversifyJS
+## Add InversifyJS and reflect-metadata
 InversifyJS is an extremely powerful IoC container for TypeScript.  While it has a _ton_ of options, we're going to perform very simple dependency injection in our project.
+
+Additionally, in some environments, reflect-metadata may not be required.  However, for safety, let's go ahead and add it.
 
 In the `step 7` project folder, add InversifyJS to the project:
 ```bash
-npm i inversify --save
+npm i inversify reflect-metadata --save
 ```
 
-## Create InversifyJS Configuration
+## Implement Dependency Injection
+We're now going to fully implement the dependency injection.  Looking below, you may think it's a lot of steps.  However, you'll be surprised on how easy it is.
+
+### Create InversifyJS Configuration
 As stated earlier, InversifyJS has many powerful capabilities.  However, I'm going to keep it simple for this workshop.
 
 In the `step 7` project folder, create a new file named `inversify.config.ts` and paste the following into it:
@@ -53,11 +58,13 @@ export default Kernel;
 
 Now, in the file `step 7/app/api/booksController.js`, we'll need to make some changes.
 
+### Import InversifyJS Configuration
 First, insert the following as the first line:
 ```ts
 import Kernel from '../../inversify.config';
 ```
 
+### Reference the Abstract Interface
 Next, change line 2 from:
 ```ts
 import { Books } from '../data/json/books';
@@ -67,7 +74,8 @@ to:
 import { IBook } from '../data/interfaces/books';
 ```
 
-Second, change the begining of the class constructor from:
+### Instantiate Concrete Class from IoC Container
+Change the begining of the class constructor from:
 ```ts
 export class BooksController {
 
@@ -78,7 +86,7 @@ export class BooksController {
 to (and replace the constructor):
 ```ts
 export class BooksController {
-    private _books: IBooks;
+    private _books: IBook;
 
     public constructor() { 
         this._books = Kernel.get<IBook>('IBook');
@@ -86,3 +94,31 @@ export class BooksController {
 
     ...
 ```
+
+### Update References
+Because the concrete class is now instantiated in the constructor, we no longer need to do it in the routes. Therefore, remove the two lines (one in each route):
+```ts
+var books = new Books();
+```
+
+Then, on the very next line (after the two lines you removed), updated the `books` reference to:
+```ts
+this._books.getAll().then((bkArr) => { ...
+
+this._books.get(req.params.id).then((bk) => { ...
+```
+
+### Make Concrete Classes 'Injectable'
+We now need to make both of our concrete classes (JSON and XML) injectable.
+
+Open up both `step 7/app/data/json/books.ts` _and_ `step 7/app/data/xml/books.ts` and:
+
+  1. Before the first line, insert the following 2 lines:
+  ```tsc
+  import 'reflect-metadata';
+  import { injectable } from 'inversify';
+  ```
+  2. Before the `class` declaration, insert the following descriptor:
+  ```tsc
+  @injectable()
+  ```

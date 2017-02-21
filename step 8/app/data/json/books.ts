@@ -1,6 +1,9 @@
+import 'reflect-metadata';
+import { injectable } from 'inversify';
 import * as loadJsonFile from 'load-json-file';
 import { Book, IBook } from '../interfaces/books';
 
+@injectable()
 export class Books implements IBook {
     constructor() { }
 

@@ -1,11 +1,11 @@
 import Kernel from '../../inversify.config';
 import { Router, Request, Response } from 'express';
-import { IBook } from './app/data/interfaces/books';
+import { IBook } from '../data/interfaces/books';
 
 const router: Router = Router();
 
 export class BooksController {
-    private _books: IBooks;
+    private _books: IBook;
 
     public constructor() { 
         this._books = Kernel.get<IBook>('IBook');
@@ -16,8 +16,7 @@ export class BooksController {
         router.route('/')
 
             .get((req: Request, res: Response) => {
-                var books = new Books();
-                books.getAll().then((bkArr) => {
+                this._books.getAll().then((bkArr) => {
                     res.json(bkArr);
                 });
             });
@@ -25,8 +24,7 @@ export class BooksController {
         router.route('/:id')
 
             .get((req: Request, res: Response) => {
-                var books = new Books();
-                books.get(req.params.id).then((bk) => {
+                this._books.get(req.params.id).then((bk) => {
                     if (bk == null || bk === undefined) {
                         res.sendStatus(404);
                     } else {

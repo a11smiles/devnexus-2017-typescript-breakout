@@ -1,22 +1,22 @@
 "use strict";
+var inversify_config_1 = require("../../inversify.config");
 var express_1 = require("express");
-var books_1 = require("../data/xml/books");
 var router = express_1.Router();
 var BooksController = (function () {
     function BooksController() {
+        this._books = inversify_config_1.default.get('IBook');
     }
     BooksController.prototype.Router = function () {
+        var _this = this;
         router.route('/')
             .get(function (req, res) {
-            var books = new books_1.Books();
-            books.getAll().then(function (bkArr) {
+            _this._books.getAll().then(function (bkArr) {
                 res.json(bkArr);
             });
         });
         router.route('/:id')
             .get(function (req, res) {
-            var books = new books_1.Books();
-            books.get(req.params.id).then(function (bk) {
+            _this._books.get(req.params.id).then(function (bk) {
                 if (bk == null || bk === undefined) {
                     res.sendStatus(404);
                 }
