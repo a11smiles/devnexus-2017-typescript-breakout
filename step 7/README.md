@@ -24,7 +24,7 @@ Two things:
   1. As with every tightly-coupled application, we would need to update _everywhere_ we referenced the JSON data layer to now access the XML version.  In this application, that's only one place.  However, in a much larger application, that could be a problem.
   2. And, if we wanted to be creative, we theoretically _could_ import this dependecy through our constructor.  Typically, in traditional JavaScript, this is precisely what we would have done.  However, that's not very clean, ellegant, nor does it give us a lot of options for future growth (e.g. SOA, microservices, etc.). We need something a little more robust. Still, we would need to manually import the dependency through every instantiation of the data layer class. Again, too cumbersome.
 
-Let's proceed with true dependecy injection the TypeScript way.
+Let's proceed with true dependency injection the TypeScript way.
 
 ## Add InversifyJS and reflect-metadata
 InversifyJS is an extremely powerful IoC container for TypeScript.  While it has a _ton_ of options, we're going to perform very simple dependency injection in our project.
@@ -56,9 +56,9 @@ Kernel.bind<IBook>('IBook').to(BooksJSON);
 export default Kernel;
 ```
 
+### Import InversifyJS Configuration
 Now, in the file `step 7/app/api/booksController.js`, we'll need to make some changes.
 
-### Import InversifyJS Configuration
 First, insert the following as the first line:
 ```ts
 import Kernel from '../../inversify.config';
@@ -119,8 +119,38 @@ Open up both `step 7/app/data/json/books.ts` _and_ `step 7/app/data/xml/books.ts
   import 'reflect-metadata';
   import { injectable } from 'inversify';
   ```
-  2. Before the `class` declaration, insert the following descriptor:
-  
+  2. Before the `class` declaration line, insert the following descriptor:
+
   ```tsc
   @injectable()
   ```
+
+**Explanation:**
+  1. We first created a configuration file for InversifyJS.  This configuration file maps concrete implementations to interfaces.  This allows us to reference these bound concrete classes later throughout our code while simply providing a promise at the moment.  InversifyJS's web site typically demonstrates doing this through symbols.  Again, I wanted to keep this as simple as possible and, with the exception of the necessary reflect-metadata, wanted to eliminate polyfills as much as possible from our demo.
+  2. We then reference this configuration everywhere we need to _inject_ our dependency.  In our case, it's the `booksController`. 
+  3. Because we could, at any time, change out the concrete implementation of our books repository, we are simply going to reference a _promise_ of a books repository by providing the interface.
+  4. In the constructor, we reference the instantiated instance of our concrete class that was created by our IoC container and update our API to use the methods from that instance.
+  5. Finally, we inform InversifyJS that our concrete classes are injectable and provide a reference to reflect-metadata so that InversifyJS can properly perform reflection.
+
+## Compile and Test
+Let's make sure everything is working as expected. In the `step 7` folder, type the following:
+```bash
+npm run tsc
+npm test
+```
+
+You should now see 10 passing tests.
+
+Running `npm start` should allow you to view the web application (with the JSON books).
+
+## Switch the Dependency
+Now, instead of opening and editing multiple files, we only need to edit our configuration file to switch repositories.
+
+Open `step 7/inversify.config.js` and change the binding (line 8) from `BooksJSON` to `BooksXML`.
+
+Running `npm start` should now allow you view the web application, but this time with the XML books.
+
+## Finished
+Congratulations! You have now implemented dependency injection into your Node.js application.  
+
+Keep in mind that the `inversify.config.js` can programmatically change dependencies based on certain conditions (e.g. configuration files, envrionments, etc.).
