@@ -25,13 +25,13 @@ In the `step 5/app/data` folder, create a new folder named `json`.
 ## Move JSON Data to External File
 In the `step 5/app/data/books.js` file you will find the `booksData` array.  
 
-  1. Copy the _contents_ of the array (e.g. everything between the square brackets, including the brackets) to a new file, `step 5/app/data/json/data.json`.
+  1. Copy the _contents_ of the array (e.g. everything between the square brackets, **including the brackets**) to a new file, `step 5/app/data/json/data.json`.
   2. Inside the JSON file, replace all single quotes (for properties and values) with double quotes.
   3. Additionally, replace all `new Date()` instances with simply the date inside of the instantiation (i.e. `new Date('2015-08-20')` should be replaced with `"2015-08-20"`).
   4. Finally, remove the `booksData` array from the `step 5/app/data/books.js` file.
 
 ## Create an Interface
-I won't go into the details about interfaces in TypeScript, but suffice it to say, while they are not transpiled to actual JavaScript, they are an essential part of the language.  We need to create an interface for our data layer, include the book model.
+I won't go into the details about interfaces in TypeScript, but suffice it to say, while they are not transpiled to actual JavaScript, they are an essential part of the language.  We need to create an interface for our data layer, including the book model.
 
 In the `step 5/app/data` folder, create a subfolder called `interfaces`.  Inside this folder, create a new file named `books.ts`.  In this file, place the following code:
 ```
@@ -109,7 +109,7 @@ var Book = require('../../../app/data/json/books').Books;
 ## Reorganize Data Layer Unit Tests Folder Structure and Update Reference
 Now that we've moved our data layer to a subfolder ('json'), let's do the same thing to our spec file. In `step 5/test/app/data` create a new folder called `json` and move the file `step 5/test/app/data/books.spec.js` into it.
 
-**NOTE:** Because we will eventually _inject_ our data access layer into the application at runtime, we could _theoretically_ do the same.  And, in this case, it may seem easy since we're dealing with static data files.  However, different data repositories require different mechanisms for CRUD operations - and possibly different ways to _describe_ the data within the repository (e.g. SQL vs. NoSQL) - and would require specifics around setup and teardown fixtures within our unit tests.  Therefore, its a good practice to have a different set of unit tests for each repository.
+**NOTE:** Because we will eventually _inject_ our data access layer into the application at runtime, we could _theoretically_ do the same for the unit test.  And, in this case, it may seem easy since we're dealing with static data files.  However, different data repositories require different mechanisms for CRUD operations - and possibly different ways to _describe_ the data within the repository (e.g. SQL vs. NoSQL) - and would require specifics around setup and teardown fixtures within our unit tests.  Therefore, its a good practice to have a different set of unit tests for each repository.
 
 Change the second line of `step 5/test/app/data/json/books.spec.js` to reference the new data layer:
 ```
@@ -189,7 +189,7 @@ let books = new BooksController();
 router.use('/books', books.Router());
 
 export const ApiRoutesController: Router = router;
-``
+```
 
 **Explanation:**
 
