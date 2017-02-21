@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+    <book id="1515212114">
+        <name>XML Programming Success in a Day: Beginner?s Guide to Fast, Easy, and Efficient Learning of XML Programming</name>
+        <author>Sam Key</author>
+        <publishedDate>2015-07-24</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51QgY1xXv3L._SX331_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="0596004206">
+        <name>Learning XML, Second Edition</name>
+        <author>Erik T. Ray</author>
+        <publishedDate>2003-10-02</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51RT7H4bYRL._SX378_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="0321559673">
+        <name>XML: Visual QuickStart Guide (2nd Edition)</name>
+        <author>Kevin Howard Goldberg</author>
+        <publishedDate>2008-12-21</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51h2mOagqHL._SX382_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="1118162137">
+        <name>Beginning XML</name>
+        <author>Joe Fawcett</author>
+        <publishedDate>2012-07-10</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51TJPYgJ2sL._SX392_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="0596007647">
+        <name>XML in a Nutshell, Third Edition</name>
+        <author>Elliotte Rusty Harold</author>
+        <publishedDate>2004-09-01</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/419YFBHOXZL._SX335_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="1840783370">
+        <name>XML in easy steps</name>
+        <author>Mike McGrath</author>
+        <publishedDate>2007-11-28</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/510zaBvEApL._SX402_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="0764588451">
+        <name>XML For Dummies</name>
+        <author>Lucinda Dykes</author>
+        <publishedDate>2005-05-20</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51lKYD6mVtL._SX395_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="1491915102">
+        <name>XQuery: Search Across a Variety of XML Data</name>
+        <author>Priscilla Walmsley</author>
+        <publishedDate>2016-01-07</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51bBtc1mnxL._SX379_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="128507582X">
+        <name>New Perspectives on XML, Comprehensive</name>
+        <author>Patrick Carey, Sasha Vodnik</author>
+        <publishedDate>2014-12-02</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51eG9dj7-vL._SX389_BO1,204,203,200_.jpg</cover>
+    </book>
+    <book id="0596009747">
+        <name>XSLT Cookbook: Solutions and Examples for XML and XSLT Developers, 2nd Edition</name>
+        <author>Sal Mangano</author>
+        <publishedDate>2005-12-21</publishedDate>
+        <cover>https://images-na.ssl-images-amazon.com/images/I/51hjnr4HH6L._SX382_BO1,204,203,200_.jpg</cover>
+    </book>
+</books>
