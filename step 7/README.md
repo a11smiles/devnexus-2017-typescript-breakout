@@ -114,11 +114,12 @@ We now need to make both of our concrete classes (JSON and XML) injectable.
 Open up both `step 7/app/data/json/books.ts` _and_ `step 7/app/data/xml/books.ts` and:
 
   1. Before the first line, insert the following 2 lines:
-  ```tsc
-  import 'reflect-metadata';
-  import { injectable } from 'inversify';
-  ```
+```tsc
+import 'reflect-metadata';
+import { injectable } from 'inversify';
+```
+
   2. Before the `class` declaration, insert the following descriptor:
-  ```tsc
-  @injectable()
-  ```
+```tsc
+@injectable()
+```
