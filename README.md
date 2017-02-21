@@ -27,7 +27,7 @@ Now that unit tests have been added to the Node.js application, we'll begin cove
 The purpose of this step is to finish our Node.js vanilla Javascript-to-TypeScript conversion.  Additionally, we will move the hard-coded data to an external JSON file to mimic an external repository.
 
 ### Step 6. Create Second Repository (XML) and Add Unit Tests
-We'll start by properly creating our unit tests to test a secondary repository.  We will then create the secondary 'repository' that contains the data in an XML file to mimic a second repository type.  
+We'll start by properly creating our unit tests to test a secondary repository.  We will then create the secondary 'repository' that contains the data in an XML file to mimic a different repository type.  
 
 ### Step 7. Add Dependency Injection and Refactor
 To this point, we've converted the entire application from JavaScript to TypeScript and have added unit tests.  We will now decouple the data layer and the service layer by introducing dependency injection.  By adding dependency injection, we can easily switch between our two repositories while requiring _very_ minimal refactoring.
