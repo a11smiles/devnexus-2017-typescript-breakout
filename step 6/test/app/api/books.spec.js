@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var request = require('supertest');
-var Books = require('../../../app/data/books');
+var Books = require('../../../app/data/json/books').Books;
 
 describe('API: books', function () {
     var server;
