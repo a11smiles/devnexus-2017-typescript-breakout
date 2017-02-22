@@ -87,9 +87,10 @@ export class Books implements IBook {
 ```
 
 **Explanation:**
-
-
-
+  1. We are importing a reference to both objects, our model and interface, that we created in the previous step.
+  2. We are creating a class that _implements_ our `IBook` interface.  Doing so requires that it contains the two methods `get` and `getAll`.
+  3. Unlike our previous implementation of the data layer where each method returns a hard-coded array which is synchronous, we are now returning a _Promise_ which allows our application to run asynchronously.
+  4. Each method reads the data directly from the 'data.json' file and returns the results.
 
 ## Delete the Old Data Layer
 We no longer need the old data layer as it has now been replaced by our new one that implements `IBook` and reads the JSON from an external file.  Therefore, go ahead and safely delete `step 5/app/data/books.js`.
@@ -169,6 +170,9 @@ export class BooksController {
 ```
 
 **Explanation:**
+  1. We import the necessary object types from express to be used in TypeScript.
+  2. We then create our two routes that call the data layer we implemented above.
+  3. Notice that 'book' has been removed from the two URLs as we'll map that in the next step.
 
 ## Create API Routes Controller
 To keep our project organized and our express application file clean, let's create a single, master API controller that will allow us to add API routes should we need to later.
@@ -192,6 +196,9 @@ export const ApiRoutesController: Router = router;
 ```
 
 **Explanation:**
+  1. All requests directed to the API, must start with '/api' in the URL as configured in the main express application.
+  2. Any request to '/api/' is automatically dropped.
+  2. Any request to '/api/books/ is sent to the `booksController` created in the previous step.
 
 ## Update _server.ts_
 There's two small modifications we need to make to the `step 5/server.ts` file.
