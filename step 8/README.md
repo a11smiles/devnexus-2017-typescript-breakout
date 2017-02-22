@@ -149,3 +149,5 @@ Running `npm start` should allow you to view the web application. By default, if
     http://localhost:8080/?repo=json  
   * XML:  
     http://localhost:8080/?repo=xml
+
+**NOTE:** Keep in mind how a book is found once it is clicked on...the repository is filtered.  If you click on a JSON book, the URL becomes `http://localhost:8080/book/{some id}`, the JSON repository is searched and filtered, and the book is returned.  If you click on an XML book, the URL becomes `http://localhost:8080/book/{some id}` (the **same** as the JSON URL), the JSON repository is searched and filtered, and the book is **not found**.  Therefore, when clicking on an XML book, you'll need to manually add `?repo=xml` to the end of the URL so that the correct repository is searched and the book is returned.  Yes, I could have programmed this into the Angular 2 app, but in an attempt to keep the workshop as simple as possible, I elected not to do so.
