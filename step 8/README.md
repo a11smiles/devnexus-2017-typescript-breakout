@@ -114,7 +114,7 @@ And, finally, insert the following line after the two bindings you added earlier
 Kernel.bind<BooksController>('BooksController').to(BooksController);
 ```
 
-## Update the API router
+## Update the API Router
 Open `step 8/app/api/index.ts` and insert the following as the first line:
 ```ts
 import Kernel from '../../inversify.config';
