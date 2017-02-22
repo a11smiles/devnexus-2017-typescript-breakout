@@ -19,15 +19,15 @@ export class BooksDetailComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this._route.params.forEach((params: Params) => {
-            let id = params['id'];
-            if (!!id) {
-                this._booksService.getBook(id)
-                    .then(book => {
-                        this.book = book;
-                    });
-            } else
-                this.book = new Book();
-        });
+        let id = this._route.snapshot.params['id'];
+        let repo = this._route.snapshot.queryParams['repo'];
+        
+        if (!!id) {
+            this._booksService.getBook(id, repo)
+                .then(book => {
+                    this.book = book;
+                });
+        } else
+            this.book = new Book();
     }
 }

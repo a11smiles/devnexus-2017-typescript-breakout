@@ -14,15 +14,15 @@ export class BooksService {
         this.headers.append('Accept', 'application/json');
     }
 
-     getBooks(): Promise<Book[]> {
-        return this._http.get(Config.apiServerUrl + '/books', { headers: this.headers })
+     getBooks(repo?: string): Promise<Book[]> {
+        return this._http.get(Config.apiServerUrl + '/books' + (repo ? '?repo=' + repo : '' ), { headers: this.headers })
                    .toPromise()
                    .then(response => response.json() as Book[])
                    .catch(this.handleError);
     }
 
-    getBook(id: string): Promise<Book> {
-        return this._http.get(Config.apiServerUrl + '/books/' + id, {headers: this.headers })
+    getBook(id: string, repo?: string): Promise<Book> {
+        return this._http.get(Config.apiServerUrl + '/books/' + id + (repo ? '?repo=' + repo : '' ), {headers: this.headers })
                     .toPromise()
                     .then(response => response.json() as Book)
                     .catch(this.handleError);

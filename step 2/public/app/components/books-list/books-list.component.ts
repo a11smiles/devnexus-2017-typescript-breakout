@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Book } from '../../models/book';
 import { BooksService } from '../../services/books.service';
 
@@ -15,11 +15,14 @@ export class BooksListComponent implements OnInit {
 
     constructor(
         private _booksService: BooksService,
-        private _router: Router
+        private _route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
-        this._booksService.getBooks()
+        let repo = this._route.snapshot.queryParams['repo'];
+
+        this._booksService.getBooks(repo)
             .then(books => this.books = books);
+    
     }
 }
