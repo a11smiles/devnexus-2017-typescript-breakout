@@ -143,9 +143,9 @@ You should see our 10 passing tests.
 ## Dynamically Switching Dependencies
 Running `npm start` should allow you to view the web application. By default, if you remember from above, the default repository will be our JSON books.  You can change that dynamically through appending a querystring to the end of the URL.
 
-  * JSON: 
-    http://localhost:8080
-    http://localhost:8080/?repo=
-    http://localhost:8080/?repo=json
-  * XML:
+  * JSON:   
+    http://localhost:8080  
+    http://localhost:8080/?repo=  
+    http://localhost:8080/?repo=json  
+  * XML:  
     http://localhost:8080/?repo=xml
